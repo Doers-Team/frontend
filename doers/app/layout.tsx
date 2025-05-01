@@ -1,3 +1,5 @@
+import Footer from "@/components/UI/footer/Footer";
+import Navbar from "@/components/UI/navbar/Navbar";
 import type { Metadata } from "next";
 import "../styles/globals.css";
 
@@ -13,8 +15,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className='antialiased'>
-        {children}
+      <body className='antialiased px-1.5'>
+        <Navbar/>
+        <main>
+          {children}
+        </main>
+        <Footer/>
       </body>
     </html>
   );
