@@ -1,7 +1,7 @@
-import Footer from "@/components/UI/footer/Footer";
-import Navbar from "@/components/UI/navbar/Navbar";
 import type { Metadata } from "next";
-import "../styles/globals.css";
+import '@/styles/globals.css'
+import PageSwitcher from "@/components/PageSwitcher";
+import Navbar from "@/components/UI/navbar/Navbar";
 
 export const metadata: Metadata = {
   title: "Test",
@@ -15,12 +15,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className='antialiased px-1.5'>
-        <Navbar/>
-        <main>
+      <body className='antialiased flex flex-col items-center justify-center'>
+        <main className="flex items-center justify-center">
           {children}
         </main>
-        <Footer/>
+        <Navbar/>
       </body>
     </html>
   );

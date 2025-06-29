@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 
-type TabLinkProps = {
+interface TabLinkProps {
     href: string;
     upDown?: boolean;
     text: string;
