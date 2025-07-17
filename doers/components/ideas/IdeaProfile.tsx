@@ -4,7 +4,7 @@ const IdeaProfile = ({ idea }: IdeaProps) => {
     return (
         <div className='w-[60vw] flex flex-col items-center justify-between mt-20'>
             <div className='w-full flex flex-row items-center justify-between'>
-                <div className="flex flex-col items-center justify-between">
+                <div className="flex flex-col items-center justify-between text-center">
                     <h1 className="bg-slate-200 text-5xl text-fg rounded-primary shadow-primary p-5 font-bold mb-2.5">{idea.title}</h1>
                     <h2 className="bg-slate-200 text-2xl text-fg rounded-primary shadow-primary p-5 font-light mt-2.5">{idea.doer}</h2>
                 </div>

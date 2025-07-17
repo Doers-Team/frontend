@@ -3,7 +3,7 @@ import { HeartIcon, HomeIcon } from '@heroicons/react/24/outline';
 
 const IdeaItem = ({ idea }: IdeaProps) => {
   return (
-    <div className='w-[75%] h-[160px] flex flex-row items-center justify-between bg-slate-300 rounded-primary shadow-primary my-2'>
+    <div className='w-[75%] h-[160px] flex flex-row items-center justify-between bg-slate-200 rounded-primary shadow-primary my-2'>
       <div className='flex flex-row items-center justify-center ml-5 mr-2.5'>
         <img className='w-30 h-30 bg-green-500 rounded-primary'/>
 

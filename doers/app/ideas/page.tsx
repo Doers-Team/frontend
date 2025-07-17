@@ -10,6 +10,7 @@ import FilterModal from '@/components/UI/modal/FilterModal'
 const Page = () => {
   const [ideas, setIdeas] = useState<Idea[] | undefined>()
   const [query, setQuery] = useState("")
+  const [activeCategories, setActiveCategories] = useState<string[]>([])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,34 +29,40 @@ const Page = () => {
     fetchData()
   }, [])
 
-  const filteredIdeas = useMemo(() => {
+  const handleActiveCategories = (data: string[]) => {
+    setActiveCategories(data)
+  }
+
+  const matchedIdeas = useMemo(() => {
     if (!ideas) return []
 
-    const fuse = new Fuse(ideas, {
+    const filteredIdeas = ideas.filter((idea) => activeCategories.includes(idea.category))
+
+    const fuse = new Fuse(filteredIdeas, {
       keys: ["title", "doer", "slogan"],
       threshold: 0.3,
     })
 
-    return query ? fuse.search(query).map(result => result.item) : ideas
-  }, [ideas, query])
+    return query ? fuse.search(query).map(result => result.item) : filteredIdeas
+  }, [ideas, query, activeCategories])
 
   return (
     <div className='w-[80vw] flex flex-col items-center justify-center mt-20'>
       <div className='w-[60vw] flex flex-row items-center justify-between mb-5'>
         <div>
           <input
-            className='w-[25vw] h-14 p-3 border-[3px] border-slate-300 rounded-primary shadow-primary hover:border-fg focus:border-fg'
+            className='w-[25vw] h-14 p-3 border-[3px] border-slate-200 rounded-primary shadow-primary hover:border-fg focus:border-fg'
             placeholder='Search by title, doer or slogan'
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
         </div>
         <div>
-          <FilterModal/>
-          <button className='w-[6vw] h-14 px-5 py-3 bg-slate-300 rounded-primary shadow-primary hover:bg-slate-400'>Sort by</button>
+          <FilterModal sendActiveCategories={handleActiveCategories}/>
+          <button className='w-[6vw] h-14 px-5 py-3 bg-slate-200 cursor-pointer rounded-primary shadow-primary hover:bg-stone-200 transition-colors duration-200'>Sort by</button>
         </div>
       </div>
-      <IdeaList ideas={filteredIdeas} />
+      <IdeaList ideas={matchedIdeas} />
     </div>
   )
 }
