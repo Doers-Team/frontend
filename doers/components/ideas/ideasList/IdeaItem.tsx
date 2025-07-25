@@ -1,9 +1,18 @@
 import { IdeaProps } from "@/interfaces/ideas"
-import { HeartIcon, HomeIcon } from '@heroicons/react/24/outline';
+import { HeartIcon } from '@heroicons/react/24/outline';
+import { motion } from "framer-motion";
 
 const IdeaItem = ({ idea }: IdeaProps) => {
   return (
-    <div className='w-[75%] h-[160px] flex flex-row items-center justify-between bg-slate-200 rounded-primary shadow-primary my-2'>
+    <motion.div
+      initial={{ scale: 0.9, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      transition={{
+        type: "spring",
+        stiffness: 150,
+        damping: 15,
+      }}
+      className='w-[75%] h-[160px] flex flex-row items-center justify-between bg-slate-200 rounded-primary shadow-primary my-2'>
       <div className='flex flex-row items-center justify-center ml-5 mr-2.5'>
         <img className='w-30 h-30 bg-green-500 rounded-primary'/>
 
@@ -18,7 +27,7 @@ const IdeaItem = ({ idea }: IdeaProps) => {
         <h1 className="flex flex-row items-center justify-center">{idea.ideaLikes.length} <HeartIcon className="w-9 h-9" /></h1>
         <h1 className="flex flex-row items-center justify-center">{idea.ideaComments.length} <HeartIcon className="w-9 h-9" /></h1>
       </div>
-    </div>
+    </motion.div>
   )
 }
 

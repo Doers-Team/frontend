@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className='antialiased flex flex-col items-center justify-center'>
-        <main className="flex items-center justify-center">
+        <main className="w-full flex items-center justify-center">
           {children}
         </main>
         <Navbar/>

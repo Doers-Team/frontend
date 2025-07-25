@@ -50,7 +50,7 @@ const FilterModal: React.FC<FilterModalProps> = ({ sendActiveCategories }) => {
     <>
       <button
         onClick={toggleModal}
-        className="w-[8vw] h-14 mr-5 px-5 py-3 cursor-pointer bg-slate-200 rounded-primary shadow-primary hover:bg-stone-200 transition-colors duration-200"
+        className="w-[8vw] h-16 mr-5 px-5 py-3 cursor-pointer bg-slate-200 rounded-primary shadow-primary hover:bg-stone-200 transition-colors duration-300"
       >
         Filter
       </button>
@@ -59,7 +59,7 @@ const FilterModal: React.FC<FilterModalProps> = ({ sendActiveCategories }) => {
         <div className="fixed inset-0 z-10 flex items-center justify-center">
           <div
             onClick={toggleModal}
-            className="absolute inset-0 bg-gray-500/75 backdrop-blur-[3px] blur-[3px]"
+            className="absolute inset-0 bg-gray-500/75 backdrop-blur-[3px] blur-[3px] brightness-75"
           />
 
           <div
@@ -77,7 +77,7 @@ const FilterModal: React.FC<FilterModalProps> = ({ sendActiveCategories }) => {
                     onClick={() => toggleCategoryStatus(category.value)}
                     className={`
                       px-6 py-8 rounded-primary shadow-primary text-center cursor-pointer
-                      transition-colors duration-200
+                      transition-colors duration-300
                       ${isActive ? 'bg-slate-300 hover:bg-stone-300' : 'bg-slate-100 hover:bg-stone-200'}
                     `}
                   >
