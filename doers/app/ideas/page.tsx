@@ -6,13 +6,15 @@ import axios from 'axios'
 import Fuse from "fuse.js"
 import { Idea } from '@/interfaces/ideas'
 import FilterModal from '@/components/UI/modal/FilterModal'
-import { XMarkIcon } from '@heroicons/react/24/outline';
+import { XMarkIcon, PlusIcon } from '@heroicons/react/24/outline';
 import { motion } from "framer-motion";
+import Link from 'next/link'
 
 const Page = () => {
   const [ideas, setIdeas] = useState<Idea[] | undefined>()
   const [query, setQuery] = useState("")
   const [activeCategories, setActiveCategories] = useState<string[]>([])
+  const [isToken, setIsToken] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,6 +31,13 @@ const Page = () => {
     }
 
     fetchData()
+  }, [])
+
+  useEffect(() => {
+    const token = localStorage.getItem("access");
+      if (token) {
+        setIsToken(true)
+      }
   }, [])
 
   const handleActiveCategories = (data: string[]) => {
@@ -72,7 +81,21 @@ const Page = () => {
           />
           <XMarkIcon onClick={clearQuery} className={`${query.length > 0 ? "opacity-100" : "opacity-0"} transition-opacity duration-300 absolute text-fg top-0 right-0 m-5 w-6 h-6 cursor-pointer hover:text-gray-500`}/>
         </div>
-        <div>
+        <div className='flex gap-3 items-center justify-between'>
+          {isToken ? 
+            <Link href='/ideas/create/'>
+              <PlusIcon className='w-[4vw] h-16 p-5 text-fg bg-slate-200 rounded-primary shadow-primary hover:bg-stone-200 transition-colors duration-300' />
+            </Link>
+            :
+            <Link href='/login'>
+              <div className="relative group">
+                <PlusIcon className='w-[4vw] h-16 p-5 text-gray-500 bg-gray-300 rounded-primary shadow-primary opacity-50 pointer-events-none' />
+                <div className="absolute top-full mt-1 left-1/2 -translate-x-1/2 px-3 py-1 bg-fg text-bg text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                  Login required
+                </div>
+              </div>
+            </Link>
+          }
           <FilterModal sendActiveCategories={handleActiveCategories}/>
           <button className='w-[6vw] h-16 px-5 py-3 bg-slate-200 cursor-pointer rounded-primary shadow-primary hover:bg-stone-200 transition-colors duration-300'>Sort by</button>
         </div>

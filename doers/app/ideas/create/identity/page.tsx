@@ -4,11 +4,19 @@ import { useEffect, useRef, useState } from "react"
 import axios from 'axios'
 import { Category } from "@/interfaces/ideas"
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 const page = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [categoriesDDIsOpen, setCategoriesDDIsOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(["select_idea_category", "Select idea category"]);
+
+  const [title, setTitle] = useState("");
+  const [slogan, setSlogan] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("business_and_startups");
+
+  const router = useRouter();
 
   const categoriesDDBtnRef = useRef<HTMLInputElement>(null);
 
@@ -25,8 +33,41 @@ const page = () => {
     }
   }
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("slogan", slogan);
+    formData.append("description", description);
+    formData.append("category", category);
+
+    const res = await fetch("http://localhost:8000/api/ideas/", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+      },
+      body: formData,
+    });
+
+    if (res.ok) {
+      alert("Idea created");
+    } else {
+      const error = await res.json();
+      console.error(error);
+      alert("Idea creation error");
+    }
+  };
+
   useEffect(() => {
     fetchCategories()
+  }, [])
+
+  useEffect(() => {
+    const token = localStorage.getItem("access");
+      if (!token) {
+        router.push("/login");
+      }
   }, [])
 
   useEffect(() => {

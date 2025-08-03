@@ -17,6 +17,7 @@ export interface IdeaLike {
   
 export interface IdeaComment {
     id: string;
+    text: string;
     idea: string;
     author: string;
     created_at: string;

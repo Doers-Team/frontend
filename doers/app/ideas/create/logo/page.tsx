@@ -5,18 +5,19 @@ import { XMarkIcon, TrashIcon } from '@heroicons/react/24/outline'
 import { motion } from "framer-motion"
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
-
+import { useRouter } from "next/navigation";
 
 interface Logo {
   logo: File;
   url : string;
 };
 
-
 const Page = () => {
   const dragDropField = useRef<HTMLLabelElement>(null)
   const [isDragOver, setIsDragOver] = useState(false)
   const [logo, setLogo] = useState<Logo | null>(null)
+
+  const router = useRouter();
 
   useEffect(() => {
     const field = dragDropField.current
@@ -70,6 +71,14 @@ const Page = () => {
       }
     }
   }, [logo])
+
+  useEffect(() => {
+    const token = localStorage.getItem("access");
+      if (!token) {
+        router.push("/login");
+      }
+  }, [])
+
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -143,7 +152,7 @@ const Page = () => {
           </button>
         </div>
       </div>
-      <Warning text={"Pizda"}/>
+      {/*<Warning text={"Pizda"}/>*/}
     </motion.div>
   )
 }

@@ -50,7 +50,7 @@ const FilterModal: React.FC<FilterModalProps> = ({ sendActiveCategories }) => {
     <>
       <button
         onClick={toggleModal}
-        className="w-[8vw] h-16 mr-5 px-5 py-3 cursor-pointer bg-slate-200 rounded-primary shadow-primary hover:bg-stone-200 transition-colors duration-300"
+        className="w-[8vw] h-16 px-5 py-3 cursor-pointer bg-slate-200 rounded-primary shadow-primary hover:bg-stone-200 transition-colors duration-300"
       >
         Filter
       </button>
