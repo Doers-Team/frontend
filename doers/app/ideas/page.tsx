@@ -97,7 +97,7 @@ const Page = () => {
             </Link>
           }
           <FilterModal sendActiveCategories={handleActiveCategories}/>
-          <button className='w-[6vw] h-16 px-5 py-3 bg-slate-200 cursor-pointer rounded-primary shadow-primary hover:bg-stone-200 transition-colors duration-300'>Sort by</button>
+          {/*<button className='w-[6vw] h-16 px-5 py-3 bg-slate-200 cursor-pointer rounded-primary shadow-primary hover:bg-stone-200 transition-colors duration-300'>Sort by</button>*/}
         </div>
       </motion.div>
       <IdeaList ideas={matchedIdeas} />

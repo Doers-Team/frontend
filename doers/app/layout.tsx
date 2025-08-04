@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import '@/styles/globals.css'
-import PageSwitcher from "@/components/PageSwitcher";
 import Navbar from "@/components/UI/navbar/Navbar";
 
 export const metadata: Metadata = {
-  title: "Test",
-  description: "Test metadata",
+  title: "Doers",
+  description: "Doers metadata",
+  icons: {
+    icon: "/assets/favicons/favicon.ico",
+  },
 };
 
 export default function RootLayout({

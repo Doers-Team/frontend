@@ -46,6 +46,7 @@ const page = () => {
     e.preventDefault();
 
     const formData = new FormData();
+    formData.append("id", title.slice(0, 50));
     formData.append("title", title);
     formData.append("slogan", slogan);
     formData.append("description", description);
@@ -62,6 +63,7 @@ const page = () => {
 
     if (res.ok) {
       alert("Idea created");
+      router.push("/ideas");
     } else {
       console.log(localStorage.getItem("access"))
       const error = await res.json();
@@ -253,8 +255,8 @@ const page = () => {
         </div>
 
         <div className="w-full mt-10 flex flex-wrap flex-row justify-center items-center mb-28">
-          <Link href={"/ideas"}>
-            <button className="w-1/6 h-18 mr-5 p-5 bg-gray-200 rounded-primary cursor-pointer shadow-primary transition-colors duration-200 hover:bg-gray-300">Cancel</button>
+          <Link className="w-1/6" href={"/ideas"}>
+            <button className="w-full h-18 mr-5 p-5 bg-gray-200 rounded-primary cursor-pointer shadow-primary transition-colors duration-200 hover:bg-gray-300">Cancel</button>
           </Link>
           <button type="submit" className="w-1/6 h-18 ml-5 p-5 bg-green-400 rounded-primary cursor-pointer shadow-primary transition-colors duration-200 hover:bg-green-500">Continue</button>
         </div>
